@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Walking-Marig</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" @keydown="console.log('down')">
+        <div class="charactor" :class="charactorStatus"></div>
+        <button @click="charactorStatus = ['c-mid', 'c-jump']">jump</button>
+        <button @click="walkingChange">walk1</button>
+        <button @click="stopWalking">walk2</button>
+
+        <p>↓のアセットリソースからCSSで切り出すDEMO</p>
+        <img src="./mario-charset.png">
+
+    </div>
+    <script>
+        let walkAnimationInterval;
+        var app = new Vue({
+            el: '#app',
+            data: {
+                charactorStatus: ['c-mid', 'c-walk1'],
+                marioStyle: {
+                    walk1: {
+
+                    },
+                }
+            },
+            methods: {
+                walkingChange: function () {
+                    this.charactorStatus = ['c-mid', 'c-walk1'];
+                    walkAnimationInterval = setInterval(()=>{
+                        if (this.charactorStatus.indexOf('c-walk1') < 0) {
+                            const walk2Index = this.charactorStatus.indexOf('c-walk2');
+                            if (walk2Index >= 0) {
+                                this.charactorStatus.splice(walk2Index, 1);
+                            }
+                            this.charactorStatus.push('c-walk1');
+                        } else {
+                            const walk1Index = this.charactorStatus.indexOf('c-walk1');
+                            if (walk1Index >= 0) {
+                                this.charactorStatus.splice(walk1Index, 1);
+                            }
+                            this.charactorStatus.push('c-walk2');
+                        }
+                    }, 200)
+                },
+                stopWalking: function () {
+                    clearInterval(walkAnimationInterval);
+                }
+            }
+        })
+    </script>
+
+    <style>
+        .charactor {
+            background-image: url("mario-charset.png");
+            width: 32px;
+            height: 32px;
+        }
+        .c-mid {
+            background-position-y: 80px;
+        }
+        .c-walk1 {
+            background-position-x: 0;
+        }
+        .c-walk2 {
+            background-position-x: 236px;
+
+        }
+        .c-jump {
+            background-position-x: 160px;
+        }
+    </style>
+</body>
+
+</html>

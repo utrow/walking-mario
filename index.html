@@ -19,6 +19,13 @@
         <p>↓のアセットリソースからCSSで切り出すDEMO</p>
         <img src="./mario-charset.png">
 
+        <p>DS時代のコイン</p>
+        <div class="coin-ds"></div>
+
+        64時代のコイン
+        <div class="coin-64"></div>
+
+
     </div>
     <script>
         let walkAnimationInterval;
@@ -60,7 +67,7 @@
 
     <style>
         .charactor {
-            background-image: url("mario-charset.png");
+            background-image: url(mario-charset.png);
             width: 32px;
             height: 32px;
         }
@@ -77,6 +84,59 @@
         .c-jump {
             background-position-x: 160px;
         }
+
+        .coin-ds {
+            background: url(mario-cart-ds-coin.png) no-repeat;
+            width: 64px;
+            height: 64px;
+            animation: kf-coin-ds 1s steps(1) infinite;
+        }
+
+        @keyframes kf-coin-ds {
+            0% {
+                background-position: -4px -4px;
+            }
+            12.5% {
+                background-position: -72px -4px;
+            }
+            25% {
+                background-position: -4px -72px;
+            }
+            37.5% {
+                background-position: -72px -72px;
+            }
+            50% {
+                background-position: -4px -140px;
+            }
+            62.5% {
+                background-position: -72px -140px;
+            }
+            75% {
+                background-position: -4px -208px;
+            }
+            87.5% {
+                background-position: -72px -208px;
+            }
+        }
+
+        .coin-64 {
+            background: url(nintendo-64-mario.png) no-repeat;
+            width: 25px;
+            height: 25px;
+            animation: kf-coin-64 1s steps(9) infinite;
+        }
+
+        @keyframes kf-coin-64 {
+            from {
+                background-position: -2px -2px;
+            }
+            to{
+                background-position: -263px -2px;
+            }
+        }
+
+
+
     </style>
 </body>
 
